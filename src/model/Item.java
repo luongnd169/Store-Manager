@@ -1,30 +1,51 @@
 package model;
 
 public class Item {
-	private String id;
+	private String serialNumber;
 	private String name;
-	private double price;
+	private String type;
+	private double purchasePrice;
+	private double sellPrice;
 	private int quantity;
-	private Customer supplier;
+	private Customer provider;
 
 	public Item() {
 
 	}
 
-	public Item(String id, String name, double price, int quantity, Customer supplier) {
-		this.id = id;
+	public Item(String serialNumber, String name, String type, double purchasePrice, double sellPrice, int quantity,
+			Customer provider) {
+		this.serialNumber = serialNumber;
 		this.name = name;
-		this.price = price;
+		this.type = type;
+		this.purchasePrice = purchasePrice;
+		this.sellPrice = sellPrice;
 		this.quantity = quantity;
-		this.supplier = supplier;
+		this.provider = provider;
 	}
 
-	public String getId() {
-		return id;
+	public double getPurchasePrice() {
+		return purchasePrice;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setPurchasePrice(double purchasePrice) {
+		this.purchasePrice = purchasePrice;
+	}
+
+	public double getSellPrice() {
+		return sellPrice;
+	}
+
+	public void setSellPrice(double sellPrice) {
+		this.sellPrice = sellPrice;
+	}
+
+	public String getSerialNumber() {
+		return serialNumber;
+	}
+
+	public void setSerialNumber(String serialNumber) {
+		this.serialNumber = serialNumber;
 	}
 
 	public String getName() {
@@ -35,14 +56,6 @@ public class Item {
 		this.name = name;
 	}
 
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
 	public int getQuantity() {
 		return quantity;
 	}
@@ -51,12 +64,27 @@ public class Item {
 		this.quantity = quantity;
 	}
 
-	public Customer getSupplier() {
-		return supplier;
+	public Customer getProvider() {
+		return provider;
 	}
 
-	public void setSupplier(Customer supplier) {
-		this.supplier = supplier;
+	public void setProvider(Customer provider) {
+		this.provider = provider;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	@Override
+	public String toString() {
+		return "Item [serialNumber=" + serialNumber + ", name=" + name + ", type=" + type + ", purchasePrice="
+				+ purchasePrice + ", sellPrice=" + sellPrice + ", quantity=" + quantity + ", provider=" + provider
+				+ "]";
 	}
 
 }

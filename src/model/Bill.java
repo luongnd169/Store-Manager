@@ -6,15 +6,19 @@ public class Bill {
 	private String billNumber;
 	private Customer customer;
 	private ArrayList<Item> listItem;
+	private double totalPrice;
+	private int type;
 
 	public Bill() {
 
 	}
 	
-	public Bill(String billNumber, Customer customer, ArrayList<Item> listItem) {
+	public Bill(String billNumber, Customer customer, ArrayList<Item> listItem, double totalPrice, int type) {
 		this.billNumber = billNumber;
 		this.customer = customer;
 		this.listItem = listItem;
+		this.totalPrice = totalPrice;
+		this.type = type;
 	}
 
 	public String getBillNumber() {
@@ -39,6 +43,22 @@ public class Bill {
 
 	public void setListItem(ArrayList<Item> listItem) {
 		this.listItem = listItem;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 }
