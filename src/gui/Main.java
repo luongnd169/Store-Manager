@@ -18,6 +18,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 import model.DAO;
@@ -31,8 +32,7 @@ public class Main {
 	private JTable table;
 	private JTextField textField;
 	private DefaultTableModel dtm = new DefaultTableModel();
-	private String[] colsName = { "Mã sản phẩm", "Tên sản phẩm", "Loại", "Số lượng", "Giá nhập", "Giá xuất",
-			"Nhà cung cấp" };
+	private String[] colsName = { "Mã sản phẩm", "Tên sản phẩm" };
 	private DAO dao;
 
 	/**
@@ -42,6 +42,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					Main window = new Main();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -101,18 +102,27 @@ public class Main {
 		txtSearch.setBounds(470, 17, 200, 32);
 		panel_1.add(txtSearch);
 		txtSearch.setColumns(10);
-		
+
 		table = new JTable();
 		table.setBounds(10, 100, 750, 421);
-		// updateData();
 		JScrollPane scrollPane = new JScrollPane(table);
-		table.setFillsViewportHeight(true);
+		scrollPane.setBounds(10, 100, 750, 421);
 		try {
-			table.setModel(new TableModel(dao.getItem()));
+			table.setModel(new TableModel(dao.getItem()) {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+				boolean[] columnEditables = new boolean[] { false, false, false, false, false, true, false };
+
+				public boolean isCellEditable(int row, int column) {
+					return columnEditables[column];
+				}
+			});
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		panel_1.add(table);
+		panel_1.add(scrollPane);
 
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("Nhập/Xuất", null, panel_2, null);
@@ -142,14 +152,4 @@ public class Main {
 		tabbedPane.addTab("Thống kê", null, panel_4, null);
 	}
 
-	private void updateData() {
-		dtm.setColumnIdentifiers(colsName);
-		// ArrayList<Item> list = dao.getItems();
-		// Vector<Item> vector = new Vector<>();
-		// for(Item i : list){
-		// vector.add(i);
-		// }
-		// dtm.addRow(vector);
-
-	}
 }
